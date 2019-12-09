@@ -125,4 +125,16 @@
 			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
 		});
 		
+	 	$( "a:contains('판매상품등록')" ).on("click" , function() {
+			//Debug..
+			//alert(  $( ".Depth03:contains('판매상품등록')" ) );
+	 		$(self.location).attr("href","../product/addProduct");
+	 		console.log("확인용");
+		}); 
+	 	
+	 	$( "a:contains('판매상품관리')" ).on("click" , function() {
+			//Debug..
+	 		$(self.location).attr("href","/product/listProduct?menu=manage"); 
+		}); 
+		
 	</script>  

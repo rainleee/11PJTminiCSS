@@ -7,7 +7,7 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<!-- <meta charset="EUC-KR"> -->
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
