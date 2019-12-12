@@ -11,7 +11,7 @@
 	
 <head>
 	<meta charset="EUC-KR">
-	
+		
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -55,9 +55,6 @@
 		//============= "검색"  Event  처리 =============	
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
 			 
 			 $("input[name=searchKeyword]").focus();
 			 	
@@ -71,6 +68,13 @@
 					//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
 					fncGetList(1);
 				});
+			 
+			 $( "a:contains('구매')" ).on("click" , function() {
+				 var prodNo = $(this).parents(".caption").children("input:hidden").val();
+				 //alert("여기여기 " + prodNo );
+				 self.location = "/purchase/addPurchase?prodNo=" + prodNo;
+			});
+			 
 		 });
 		
 		
@@ -78,15 +82,20 @@
 		 $(function() {
 		
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(2)" ).on("click" , function() {
-				var prodNo = $(this).children("input:hidden").val();
-				 self.location ="/product/getProduct?prodNo=" + prodNo + "&menu=${param.menu}";  
-				 console.log("prodNo : "+ prodNo); 
+			$( "a:contains('상세정보')" ).on("click" , function() {
+				var prodNo = $(this).parents(".caption").children("input:hidden").val();
+				//alert("prodNo : "+ prodNo);
+				if(${param.menu== 'manage'} ){
+					//alert("여기는 매니저작동 구간");
+					self.location ="/product/getProduct?prodNo=" + prodNo + "&menu=${param.menu}";  
+				}else if(${param.menu== 'search'}){
+					//alert("ddd");
+					self.location ="/product/getProduct?prodNo=" + prodNo + "&menu=${param.menu}";  
+				}
+				console.log("prodNo : "+ prodNo); 
 			});
-						
-			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( "td:nth-child(2)" ).css("color" , "red");
 			
+						
 		});	
 		
 		
@@ -193,6 +202,9 @@
 				  </div>
 				  
 				  <button type="button" class="btn btn-default">검색</button>
+				  <br/>
+				  <br/>
+				  <br/>
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
@@ -207,34 +219,35 @@
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >
       
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left" >상품명</th>
-            <th align="left">가격</th>
-            <th align="left">등록일</th>
-            <th align="left">현재상태</th>
-          </tr>
-        </thead>
-       
 		<tbody>
+			
 		
-		  <c:set var="i" value="0" />
+		<div class="container">
+		<div class="row">
 		  <c:forEach var="product" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">
-			  	<input type="hidden" value="${product.prodNo}">
-			  	${product.prodName}</td>
-			  <td align="left">${product.price}</td>
-			  <td align="left">${product.regDate}</td>
-			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${product.prodNo}"></i>
-			  	<input type="hidden" value="${product.prodNo}">
-			  </td>
-			</tr>
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img src="../images/uploadFiles/${product.fileNameList[0]}" style="width: 250px; height: 250px" onerror="this.src='http://placehold.it/250X250'"/>
+			      <br/>
+			      <div class="caption">
+			    	<input type="hidden" value="${product.prodNo}">
+			        <h3>${product.prodName} </h3>
+			        <p>
+			        	${product.prodDetail}<br/>
+			        	가      격 : ${product.price}<br/>
+			        	등 록 일 : ${product.regDate}<br/>
+			        	</p>
+			        <p><a href="#" class="btn btn-primary" role="button">상세정보</a> 
+     			     <c:if test="${param.menu == 'search'}">
+     					 <a href="#" class="btn btn-default" role="button" >구매</a></p>
+   	 				 </c:if>
+			      </div>
+			    </div>
+			  </div>
           </c:forEach>
+			</div>
+			</div>
+			
         
         </tbody>
       

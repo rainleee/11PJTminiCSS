@@ -52,7 +52,7 @@ public class ProductController {
 	int pageSize;
 	
 	//local로 저장하는 위치 설정
-	private static final String UPLOAD_PATH = "C:\\workspace\\09.Model2MVCShop(jQuery)\\WebContent\\images\\uploadFiles";
+	private static final String UPLOAD_PATH = "C:\\Users\\user\\git\\11PJTminiCSS\\11.Model2MVCShop\\WebContent\\images\\uploadFiles";
 	
 	
 	@RequestMapping(value = "addProduct", method =RequestMethod.GET)

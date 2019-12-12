@@ -58,8 +58,8 @@
 <script type="text/javascript">
 
  $( function() {
-	 //제이쿼리에서 가져온 캘린더
-	  $( "#manuDate" ).datepicker();
+	//제이쿼리에서 가져온 캘린더
+	$( "#manuDate" ).datepicker();
 	 
     $( "#manuDate" ).datepicker("option","dateFormat","yy-mm-dd");
     
@@ -85,14 +85,11 @@
  	
     $( ".widget button" ).button();
     
-    $("td.ct_btn01:contains('취소')").on('click', function(){
-    	$(function (){
-    		/* on = bind와 같은 효과의 펑션 */
-    		$("td.ct_btn01:contains('취소')").on('click', function(){
-    			$("form")[0].reset();
-    		});
-    		/* document.detailForm.reset(); */
-    	});
+    $(".btn-primary").on('click', function(){
+   		/* on = bind와 같은 효과의 펑션 */
+   		//alert("취소");
+   			$("form")[0].reset();
+   		/* document.detailForm.reset(); */
     } );
   } ); 
 
@@ -105,7 +102,7 @@ function fncAddProduct(){
 	var detail = $("input[name='prodDetail']").val();
 	var manuDate = $("input[name='manuDate']").val();
 	var price = $("input[name='price']").val();
-	var fileName = $("input[name='fileName']").val();
+	//var fileName = $("input[name='fileName']").val();
 	console.log("name : " + name + "detail : " + detail + "manuDate : " + manuDate +"price : " + price );
 
 	if(name == null || name.length<1){
@@ -159,6 +156,7 @@ function fncAddProduct(){
    	<!-- ToolBar End /////////////////////////////////////-->
 
 <!-- ToolBar Start /////////////////////////////////////-->
+<input type="hidden" name="prodNo" value="${product.prodNo}" />
 	<div class="navbar  navbar-default">
         <div class="container">
         	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
@@ -176,7 +174,7 @@ function fncAddProduct(){
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">상 품 명</label>
+		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상 품 명</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="상품명을 적어주세요.">
 		    </div>
@@ -206,7 +204,7 @@ function fncAddProduct(){
 		  
 		  <div class="form-group">
 		    <label for="fileImage" class="col-sm-offset-1 col-sm-3 control-label">상품이미지&emsp;&emsp;&emsp;</label>
-		   	 <input multiple="multiple" type="file" id="fileImage" />
+		   	 <input multiple="multiple" type="file" id="fileImage" name="fileImage" />
 		    <p class="help-block">5MB 이하만 업로드 가능합니다.</p>
 		  </div>
 

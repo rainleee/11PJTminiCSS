@@ -69,7 +69,7 @@
 			});
 						
 			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( "td:nth-child(2)" ).css("color" , "red");
+			$( "td:nth-child(2)" ).css("color" , "steelblue");
 			
 		});	
 		

@@ -47,6 +47,8 @@
 										p.prod_name, 
 										p.price, 
 										p.reg_date, 
+										p.prod_detail,
+										p.image_file,
 										NVL(t.tran_status_code, 'sale') tsc
 										FROM product p, transaction t 
 										<where> 
@@ -75,8 +77,8 @@
 	   	<set>
 	   		prod_name 	= #{prodName} ,
 			prod_detail	= #{prodDetail},
-			manufacture_day 	= #{manuDate} ,
-			image_file				=	#{fileName}
+			manufacture_day 	=  TO_CHAR(TO_DATE( #{manuDate:VARCHAR}, 'YYYY-MM-DD'), 'YYYYMMDD'),
+			image_file				=	#{fileName:VARCHAR}
 	   	</set>
 	   	WHERE prod_no = #{prodNo}
 	 </update>
